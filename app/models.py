@@ -73,12 +73,5 @@ class Comment(db.Model):
         db.session.add(self)
         db.session.commit()
 
-class Members(db.Model):
-    __tablename__ = 'member'
-    id = db.Column(db.Integer, primary_key=True)
-    email = db.Column(db.String)
 
-    def save_comment(self):
-        db.session.add(self)
-        db.session.commit()
 
