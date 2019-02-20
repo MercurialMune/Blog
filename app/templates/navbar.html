@@ -1,0 +1,9 @@
+<div class="w3-bar w3-black w3-hide-small">
+  <a href="{{url_for('main.index')}}" class="w3-bar-item w3-button"><i class="fa fa-home"></i></a>
+    {%if current_user.is_authenticated%}
+    <a href="{{url_for('main.profile', uname=current_user.username)}}" class="w3-bar-item w3-button w3-mobile w3-right">Profile</a>
+    <a href="{{url_for('auth.logout')}}" class="w3-bar-item w3-button w3-mobile w3-right">Log Out</a>
+    {%else%}
+    <a href="{{url_for('auth.login')}}" class="w3-bar-item w3-button w3-mobile w3-right">Log In</a>
+    {%endif%}
+</div>
