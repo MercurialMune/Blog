@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf%}
+
+{% block styles %}
+    {{super()}}
+    <link rel="stylesheet" href="{{url_for('static',filename='css/index.css')}}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open Sans">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+    h1,h2,h3,h4,h5,h6 {font-family: "Oswald"}
+    body {font-family: "Open Sans"}
+    </style>
+    {% endblock %}
+
+
+{% block content%}
+
+
+                <div class="w3-white w3-text-grey w3-card-4 w3-margin w3-display-container" style="width:30%">
+                <div class="w3-display-container w3-center">
+                {% if user.profile_pic_path %}
+                <img class="w3-margin" src="{{url_for('static',filename=user.profile_pic_path)}}" style="max-height:200px; max-width:200px; margin:10px" alt="Avatar">
+                {%else%}
+                <img src="https://www.theupholsteryforum.com/styles/FLATBOOTS/theme/images/user4.png" style="max-height:200px; max-width:200px" alt="Avatar">
+                {% endif %}
+
+                </div>
+                <div class="w3-container">
+                <h3><i class=" w3-margin-right w3-large w3-text-teal"></i>{{user.username| capitalize}}</h3>
+                {% if user.bio %}
+                <p><i class="w w3-margin-right w3-large w3-text-teal"></i>{{user.bio}}</p>
+                {%else%}
+                <p><i class="w w3-margin-right w3-large w3-text-teal"></i>No Bio Yet</p>
+                {% endif %}
+                <hr>
+                {% if user == current_user %}
+                <form class="w3-center" action="{{url_for('main.update_avatar',uname=user.username)}}" method="post" enctype ="multipart/form-data">
+                <input type="file"  name="photo"  required>
+                <input class="w3-bar-item w3-button w3-teal" type="submit">
+                <a class="w3-button w3-black w3-margin" href="{{url_for('main.update',uname=user.username)}}">Edit profile</a>
+                {% endif %}
+                </form>
+                </div>
+                </div>
+
+{% endblock %}
